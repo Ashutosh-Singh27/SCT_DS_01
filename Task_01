@@ -1,0 +1,35 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+age_bins = np.arange(0, 101)
+
+population = np.array([
+    20 + 5 * np.exp(-0.03 * (age - 20)**2) if age <= 64 else 5 * np.exp(-0.08 * (age - 65))
+    for age in age_bins
+])
+
+colors = []
+for age in age_bins:
+    if age <= 20:
+        colors.append('yellow')
+    elif 21 <= age <= 64:
+        colors.append('blue')
+    else:
+        colors.append('red')
+
+plt.figure(figsize=(15, 6))
+bars = plt.bar(age_bins, population, color=colors, edgecolor='black', width=1)
+
+plt.text(5, 27, "0–20 Years\n518 Mn\n35.97%", fontsize=10, weight='bold', color='black')
+plt.text(32, 27, "21–64 Years\n820 Mn\n56.94%", fontsize=10, weight='bold', color='black')
+plt.text(72, 12, "65+ Years\n100 Mn\n6.94%", fontsize=10, weight='bold', color='black')
+
+plt.title("Population 1.44 Billion\n", fontsize=14, weight='bold')
+plt.xlabel("Age")
+plt.ylabel("Population (Millions)")
+plt.xticks(np.arange(0, 101, 5))
+plt.yticks(np.arange(0, 31, 5))
+plt.grid(axis='y', linestyle='--', alpha=0.5)
+
+plt.tight_layout()
+plt.show()
